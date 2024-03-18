@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.of(context).pop();
                   }
                 },
-                child: const Text('Login'),
+                child: const Text('ログイン'),
               )
             ],
           ),
