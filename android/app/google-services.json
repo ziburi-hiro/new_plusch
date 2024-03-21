@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "850624926709",
+    "project_id": "plusch-firebase",
+    "storage_bucket": "plusch-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850624926709:android:356e972b36453b3dc306bc",
+        "android_client_info": {
+          "package_name": "com.example.plusch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwdlw2eZk-Skvx6sMDWoY5nOKwxYzAVNU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
