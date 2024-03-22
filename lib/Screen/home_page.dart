@@ -96,8 +96,8 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Container(
-                    height: 300,
-                    width: 400,
+                    height: screenSize.height*0.4,
+                    width: screenSize.width*0.93,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
                       color: Colors.grey.shade300,
