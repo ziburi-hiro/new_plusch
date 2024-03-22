@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                       if(result is UserCredential){
                         var _result = await UserFireStore.getUser(result.user!.uid);
                         if(_result == true){
-                          print('ログイン成功');
+                          Navigator.pushNamed(context, '/TabBarPage');
                         }else{
                           // TODO エラーハンドリング実装
                         }

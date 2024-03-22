@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plusch/Components/TabBar.dart';
 import 'package:plusch/Screen/login_page.dart';
 import 'package:plusch/Screen/member_register_page.dart';
 import 'package:plusch/Screen/welcome_page.dart';
@@ -40,6 +41,9 @@ class MyApp extends StatelessWidget {
         '/WelcomePage': (BuildContext context) => const WelcomePage(),
         '/LoginPage': (BuildContext context) => const LoginPage(),
         '/MemberRegisterPage': (BuildContext context) => const MemberRegisterPage(),
+
+        ///TabBarのルート
+        '/TabBarPage': (BuildContext context) => const TabBarPage(),
       },
     );
   }
