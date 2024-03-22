@@ -146,7 +146,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                 ),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    //Navigator.pushNamed(context, '/TermsOfServicePage');
+                                    //Navigator.pushNamed(context, '/TabBarPage');
                                   }),
                               const TextSpan (
                                 text: 'に同意して次へお進みください',
