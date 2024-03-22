@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:plusch/Constants/colors.dart';
+import 'package:plusch/Firebase/user_firestore.dart';
+import 'package:plusch/utils/authentication.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,20 +15,21 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
-  String password = '';
   bool hidePassword = true;
   final emailFormKey = GlobalKey<FormState>();
   final passFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login',style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),),
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: appbarColor,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -83,14 +88,36 @@ class _LoginPageState extends State<LoginPage> {
 
               const SizedBox(height: 15),
 
-              ElevatedButton(
-                onPressed: () {
-                  if(emailFormKey.currentState!.validate() &&
-                      passFormKey.currentState!.validate()) {
-                    Navigator.of(context).pop();
-                  }
-                },
-                child: const Text('Login'),
+              SizedBox(
+                height: screenSize.height*0.05,
+                width: screenSize.width*0.5,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: buttonColor,
+                  ),
+                  onPressed: () async {
+                    if(emailFormKey.currentState!.validate() &&
+                        passFormKey.currentState!.validate()) {
+                      var result = await Authentication.emailSignIn(email: emailController.text, pass: passController.text);
+                      if(result is UserCredential){
+                        var _result = await UserFireStore.getUser(result.user!.uid);
+                        if(_result == true){
+                          print('ログイン成功');
+                        }else{
+                          // TODO エラーハンドリング実装
+                        }
+                      }else{
+                        // TODO エラーハンドリング実装
+                      }
+                      //Navigator.of(context).pop();
+                    }
+                  },
+                  child: const Text('ログイン',style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                  ),),
+                ),
               )
             ],
           ),

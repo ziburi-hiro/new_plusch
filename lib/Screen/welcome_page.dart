@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:plusch/Constants/colors.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -145,7 +146,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                 ),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.pushNamed(context, '/TermsOfServicePage');
+                                    //Navigator.pushNamed(context, '/TermsOfServicePage');
                                   }),
                               const TextSpan (
                                 text: 'に同意して次へお進みください',
@@ -166,12 +167,18 @@ class _WelcomePageState extends State<WelcomePage> {
                           height: screenSize.height*0.05,
                           width: screenSize.width*0.8,
                           child: ElevatedButton(
-                            onPressed: (){},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: buttonColor,
+                            ),
+                            onPressed: (){
+                              Navigator.pushNamed(context, '/MemberRegisterPage');
+                            },
                             child: const Text(
                               '同意して会員登録',
                               style: TextStyle(
                                 fontSize: 20,
-                                fontWeight: FontWeight.w900
+                                fontWeight: FontWeight.w900,
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -185,6 +192,9 @@ class _WelcomePageState extends State<WelcomePage> {
                           height: screenSize.height*0.05,
                           width: screenSize.width*0.8,
                           child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: buttonColor,
+                            ),
                             onPressed: (){
                               Navigator.pushNamed(context, '/LoginPage');
                             },
@@ -192,7 +202,8 @@ class _WelcomePageState extends State<WelcomePage> {
                               'ログイン',
                               style: TextStyle(
                                   fontSize: 20,
-                                  fontWeight: FontWeight.w900
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.white
                               ),
                             ),
                           ),
