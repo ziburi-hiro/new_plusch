@@ -190,6 +190,7 @@ class _MemberRegisterPageState extends State<MemberRegisterPage> {
                             id: result.user!.uid,
                             name: userNameController.text,
                             postCode: postCodeController.text,
+                            emailAddress: emailController.text,
                           );
                           var _result = await UserFireStore.setUser(newAccount);
                           if(_result == true){

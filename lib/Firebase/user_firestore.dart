@@ -13,6 +13,7 @@ class UserFireStore {
       await users.doc(newAccount.id).set({
         'name': newAccount.name,
         'postal_code': newAccount.postCode,
+        'email_address':newAccount.emailAddress,
         'created_at': Timestamp.now(),
         'updated_at': Timestamp.now(),
       });
@@ -33,8 +34,10 @@ class UserFireStore {
           id: uid,
           name: data['name'],
           postCode: data['postal_code'],
+          emailAddress: data['email_address'],
           createdAt: data['created_at'],
-          updatedAt: data['updated_at']);
+          updatedAt: data['updated_at'],
+      );
       Authentication.myAccount = myAccount;
       return true;
     } on FirebaseException catch (e) {

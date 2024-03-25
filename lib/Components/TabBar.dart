@@ -42,7 +42,7 @@ class _TabBarPageState extends State<TabBarPage> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'MyMenu'
+              label: 'MyPage'
             )
           ],
           iconSize: 30,

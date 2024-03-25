@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:plusch/Constants/colors.dart';
 import 'package:plusch/Firebase/user_firestore.dart';
 import 'package:plusch/utils/authentication.dart';
