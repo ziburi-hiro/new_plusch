@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
               children: [
 
                 const Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.only(top: 10.0,left: 15.0),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text('おすすめ教育履歴',style: TextStyle(
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                 ),
 
                 const Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.only(top: 10.0, left: 15.0),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text('閲覧した教育履歴',style: TextStyle(
