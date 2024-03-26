@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(16),
                       color: Colors.white,
                     ),
-                    child: Text('閲覧した教育履歴表示'),
+                    child: Text('閲覧した履歴表示'),
                   ),
                 ),
 
