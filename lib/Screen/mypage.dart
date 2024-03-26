@@ -180,15 +180,212 @@ class _MyPageState extends State<MyPage> {
                   padding: const EdgeInsets.all(10.0),
                   child: Center(
                     child: Container(
-                      height: screenSize.height*0.5,
                       width: screenSize.width*0.93,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         color: Colors.white,
                       ),
-                      child: Text(myAccount.name),
+                      child: Column(
+                        children: [
+
+                          ///設定
+                          SizedBox(
+                            height: screenSize.height*0.06,
+                            width: screenSize.width*0.93,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(16),
+                                    topRight: Radius.circular(16),
+                                  )
+                                ),
+                                backgroundColor: Colors.white,
+                              ),
+                              child: const Row(
+                                children: [
+                                  Icon(
+                                    Icons.settings,
+                                    color: Colors.green,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 10.0),
+                                    child: Text('設定',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                      color: Colors.black
+                                    ),),
+                                  ),
+                                  Spacer(),
+                                  Text('>',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                      color: Colors.black
+                                  ),),
+                                ],
+                              ),
+                            ),
+                          ),
+
+                          ///機能改善
+                          SizedBox(
+                            height: screenSize.height*0.06,
+                            width: screenSize.width*0.93,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero,
+                                ),
+                                backgroundColor: Colors.white,
+                              ),
+                              child: const Row(
+                                children: [
+                                  Icon(
+                                    Icons.article,
+                                    color: Colors.purple,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 10.0),
+                                    child: Text('機能改善リクエスト',style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17,
+                                        color: Colors.black
+                                    ),),
+                                  ),
+                                  Spacer(),
+                                  Text('>',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                      color: Colors.black
+                                  ),),
+                                ],
+                              ),
+                            ),
+                          ),
+
+                          ///お気に入り
+                          SizedBox(
+                            height: screenSize.height*0.06,
+                            width: screenSize.width*0.93,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero,
+                                ),
+                                backgroundColor: Colors.white,
+                              ),
+                              child: const Row(
+                                children: [
+                                  Icon(
+                                    Icons.favorite,
+                                    color: Colors.redAccent,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 10.0),
+                                    child: Text('お気に入り',style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17,
+                                        color: Colors.black
+                                    ),),
+                                  ),
+                                  Spacer(),
+                                  Text('>',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                      color: Colors.black
+                                  ),),
+                                ],
+                              ),
+                            ),
+                          ),
+
+                          ///アカウント連携
+                          SizedBox(
+                            height: screenSize.height*0.06,
+                            width: screenSize.width*0.93,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero,
+                                ),
+                                backgroundColor: Colors.white,
+                              ),
+                              child: const Row(
+                                children: [
+                                  Icon(
+                                    Icons.people_alt,
+                                    color: Colors.blue,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 10.0),
+                                    child: Text('アカウント連携',style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17,
+                                        color: Colors.black
+                                    ),),
+                                  ),
+                                  Spacer(),
+                                  Text('>',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                      color: Colors.black
+                                  ),),
+                                ],
+                              ),
+                            ),
+                          ),
+
+                          ///ログアウト
+                          SizedBox(
+                            height: screenSize.height*0.06,
+                            width: screenSize.width*0.93,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(16),
+                                      bottomRight: Radius.circular(16),
+                                    )
+                                ),
+                                backgroundColor: Colors.white,
+                              ),
+                              child: const Row(
+                                children: [
+                                  Icon(
+                                    Icons.logout,
+                                    color: mainColor,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 10.0),
+                                    child: Text('ログアウト',style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17,
+                                        color: Colors.black
+                                    ),),
+                                  ),
+                                  Spacer(),
+                                  Text('>',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                      color: Colors.black
+                                  ),),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
                     ),
                   ),
+                ),
+
+                const SizedBox(
+                  height: 30,
                 ),
               ],
             ),
