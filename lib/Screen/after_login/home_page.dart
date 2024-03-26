@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
       borderRadius: BorderRadius.circular(16),
       color: Colors.white,
     ),
-    child: Text('おすすめ教育履歴${index+1}'),
+    child: Text('おすすめ履歴${index+1}'),
   ));
 
   @override
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                   padding: EdgeInsets.only(top: 10.0,left: 15.0),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('おすすめ教育履歴',style: TextStyle(
+                    child: Text('おすすめ履歴',style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),),
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                   padding: EdgeInsets.only(top: 10.0, left: 15.0),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('閲覧した教育履歴',style: TextStyle(
+                    child: Text('閲覧した履歴',style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),),
