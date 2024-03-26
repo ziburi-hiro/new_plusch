@@ -4,6 +4,7 @@ class Account {
   String id;
   String name;
   String postCode;
+  String emailAddress;
   Timestamp? createdAt;
   Timestamp? updatedAt;
 
@@ -11,6 +12,7 @@ class Account {
       {required this.id,
         required this.name,
         required this.postCode,
+        required this.emailAddress,
         this.createdAt,
         this.updatedAt
       });

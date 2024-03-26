@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     width: 400,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(16),
-      color: Colors.grey.shade300,
+      color: Colors.white,
     ),
     child: Text('おすすめ教育履歴${index+1}'),
   ));
@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        backgroundColor: mainBackColor,
         appBar: AppBar(
           title: const Text('ホーム',style: TextStyle(
             color: Colors.white,
@@ -100,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                     width: screenSize.width*0.93,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
-                      color: Colors.grey.shade300,
+                      color: Colors.white,
                     ),
                     child: Text('閲覧した教育履歴表示'),
                   ),
