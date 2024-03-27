@@ -126,12 +126,12 @@ class _MyPageState extends State<MyPage> {
                   ),
                 ),
 
-                ///自分の教育履歴
+                ///自分の履歴
                 const Padding(
                   padding: EdgeInsets.only(top: 10.0, left: 15.0),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('自分の教育履歴',style: TextStyle(
+                    child: Text('自分の履歴',style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),),
@@ -157,7 +157,7 @@ class _MyPageState extends State<MyPage> {
                           SchoolSelectButton(screenSize: screenSize, kindOfSchool: '高等学校', kindOfSchoolEng: 'HighSchool',),
                           SchoolSelectButton(screenSize: screenSize, kindOfSchool: '大学', kindOfSchoolEng: 'University',),
                           SchoolSelectButton(screenSize: screenSize, kindOfSchool: '大学院', kindOfSchoolEng: 'GraduateSchool',),
-                          SchoolSelectButton(screenSize: screenSize, kindOfSchool: '習い事', kindOfSchoolEng: 'Kindergarten',),
+                          SchoolSelectButton(screenSize: screenSize, kindOfSchool: '就職先', kindOfSchoolEng: 'Employment',),
                         ],
                       )
                     ),

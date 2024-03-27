@@ -2,9 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plusch/Components/TabBar.dart';
-import 'package:plusch/Screen/login_page.dart';
-import 'package:plusch/Screen/member_register_page.dart';
-import 'package:plusch/Screen/welcome_page.dart';
+import 'package:plusch/Screen/before_login/login_page.dart';
+import 'package:plusch/Screen/before_login/member_register_page.dart';
+import 'package:plusch/Screen/before_login/welcome_page.dart';
 import 'package:plusch/firebase_options.dart';
 
 final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();

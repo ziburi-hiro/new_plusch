@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:plusch/Constants/colors.dart';
-import 'package:plusch/Screen/home_page.dart';
-import 'package:plusch/Screen/mypage.dart';
+import 'package:plusch/Screen/after_login/home_page.dart';
+import 'package:plusch/Screen/after_login/mypage.dart';
+import 'package:plusch/Screen/after_login/search_history_page.dart';
 
 class TabBarPage extends StatefulWidget {
   const TabBarPage({super.key});
@@ -14,6 +15,7 @@ class _TabBarPageState extends State<TabBarPage> {
   int selectedIndex = 0;
   List<Widget> pageList = [
     const HomePage(),
+    const SearchHistoryPage(),
     const MyPage(),
   ];
 
@@ -39,6 +41,10 @@ class _TabBarPageState extends State<TabBarPage> {
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search_rounded),
+              label: 'Search'
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
