@@ -2,6 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plusch/Components/TabBar.dart';
+import 'package:plusch/Screen/after_login/home_related/home_page.dart';
+import 'package:plusch/Screen/after_login/mypage_related/enter_info_page.dart';
+import 'package:plusch/Screen/after_login/mypage_related/mypage.dart';
+import 'package:plusch/Screen/after_login/mypage_related/settings.dart';
+import 'package:plusch/Screen/after_login/search_history_related/search_history_page.dart';
 import 'package:plusch/Screen/before_login/login_page.dart';
 import 'package:plusch/Screen/before_login/member_register_page.dart';
 import 'package:plusch/Screen/before_login/welcome_page.dart';
@@ -34,17 +39,25 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      //home: const WelcomePage(),
-      initialRoute: '/WelcomePage',
-      routes: <String,WidgetBuilder> {
-        ///オンボーディングのルート
-        '/WelcomePage': (BuildContext context) => const WelcomePage(),
-        '/LoginPage': (BuildContext context) => const LoginPage(),
-        '/MemberRegisterPage': (BuildContext context) => const MemberRegisterPage(),
-
-        ///TabBarのルート
-        '/TabBarPage': (BuildContext context) => const TabBarPage(),
-      },
+      home: const WelcomePage(),
+      // initialRoute: '/WelcomePage',
+      // routes: <String,WidgetBuilder> {
+      //   ///オンボーディングのルート
+      //   '/WelcomePage': (BuildContext context) => const WelcomePage(),
+      //   '/LoginPage': (BuildContext context) => const LoginPage(),
+      //   '/MemberRegisterPage': (BuildContext context) => const MemberRegisterPage(),
+      //
+      //   ///TabBarのルート
+      //   '/TabBarPage': (BuildContext context) => const TabBarPage(),
+      //
+      //   ///ログイン後ルート
+      //   '/HomePage': (BuildContext context) => const HomePage(),
+      //   '/MyPage': (BuildContext context) => const MyPage(),
+      //   '/SearchHistoryPage': (BuildContext context) => const SearchHistoryPage(),
+      //   '/EnterInfoPage': (BuildContext context) => const EnterInfoPage(),
+      //   //'/Settings': (BuildContext context) => const Settings(),
+      //
+      // },
     );
   }
 }

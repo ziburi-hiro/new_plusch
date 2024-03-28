@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:plusch/Components/TabBar.dart';
 import 'package:plusch/Constants/colors.dart';
 import 'package:plusch/Firebase/user_firestore.dart';
 import 'package:plusch/utils/authentication.dart';
@@ -101,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                       if(result is UserCredential){
                         var _result = await UserFireStore.getUser(result.user!.uid);
                         if(_result == true){
-                          Navigator.pushNamed(context, '/TabBarPage');
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TabBarPage()));
                         }else{
                           // TODO エラーハンドリング実装
                         }
