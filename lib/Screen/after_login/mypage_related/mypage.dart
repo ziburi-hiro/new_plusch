@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plusch/Components/schoolselectbutton.dart';
 import 'package:plusch/Constants/colors.dart';
 import 'package:plusch/Models/account.dart';
+import 'package:plusch/Screen/after_login/mypage_related/settings.dart';
 import 'package:plusch/utils/authentication.dart';
 
 class MyPage extends StatefulWidget {
@@ -193,7 +194,9 @@ class _MyPageState extends State<MyPage> {
                             height: screenSize.height*0.06,
                             width: screenSize.width*0.93,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                //Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Settings(test)));
+                              },
                               style: ElevatedButton.styleFrom(
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
