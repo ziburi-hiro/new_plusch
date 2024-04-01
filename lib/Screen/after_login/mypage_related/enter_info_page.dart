@@ -3,6 +3,7 @@ import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plusch/Constants/colors.dart';
 import 'package:plusch/Models/YearMonthModel.dart';
+import 'package:plusch/Screen/after_login/mypage_related/prefectures_select_page.dart';
 
 class EnterInfoPage extends StatefulWidget {
   EnterInfoPage(this.kindOfSchool , {super.key});
@@ -74,7 +75,12 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
                           backgroundColor: buttonColor,
                         ),
                         onPressed: () {
-
+                          Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => PrefecturesSelectPage(),
+                                fullscreenDialog: true,
+                              )
+                          );
                         },
                         child: const Text('都道府県から学校を選択',style: TextStyle(
                           fontWeight: FontWeight.bold,

@@ -24,7 +24,6 @@ class SchoolSelectButton extends StatelessWidget {
           Navigator.of(context).push(
               MaterialPageRoute(
                   builder: (context) => EnterInfoPage({'school':kindOfSchool, 'schoolEng':kindOfSchoolEng}),
-                  fullscreenDialog: true,
               )
           );
         },
