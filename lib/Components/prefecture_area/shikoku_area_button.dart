@@ -4,9 +4,11 @@ class ShikokuArea extends StatefulWidget {
   const ShikokuArea({
     super.key,
     required this.screenSize,
+    required this.schoolTypeEng
   });
 
   final Size screenSize;
+  final String schoolTypeEng;
 
   @override
   State<ShikokuArea> createState() => _ShikokuAreaState();

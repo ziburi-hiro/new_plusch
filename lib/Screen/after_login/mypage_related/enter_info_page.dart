@@ -77,7 +77,7 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
                         onPressed: () {
                           Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => PrefecturesSelectPage(),
+                                builder: (context) => PrefecturesSelectPage(widget.kindOfSchool['schoolEng']),
                                 fullscreenDialog: true,
                               )
                           );

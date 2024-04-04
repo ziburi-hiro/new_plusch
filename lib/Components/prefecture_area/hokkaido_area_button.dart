@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:plusch/Components/prefecture_area/municioalities_list.dart';
-import 'package:plusch/Screen/after_login/mypage_related/school_list_page.dart';
+import 'package:plusch/Components/prefecture_area/municipalities_list.dart';
+import 'package:plusch/Models/school.dart';
 
 class HokkaidoArea extends StatefulWidget {
   const HokkaidoArea({
     super.key,
     required this.screenSize,
+    required this.schoolTypeEng,
   });
 
   final Size screenSize;
+  final String schoolTypeEng;
 
   @override
   State<HokkaidoArea> createState() => _HokkaidoAreaState();
@@ -16,10 +18,14 @@ class HokkaidoArea extends StatefulWidget {
 
 class _HokkaidoAreaState extends State<HokkaidoArea> {
 
-  final List cities = municipalitiesMap['01']!;
+  List cities = municipalitiesMap['01']!;
+  String city = '札幌市';
+  int selectedTile = -1;
 
   @override
   Widget build(BuildContext context) {
+    Future<List<School>>? _schoolList =  School.getSchoolList(1,city,widget.schoolTypeEng);
+
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
@@ -44,21 +50,88 @@ class _HokkaidoAreaState extends State<HokkaidoArea> {
                 ),
                 onExpansionChanged: (bool changed) {},
                 children: [
-                  for (int i = 0; i < cities.length; i++)
-                    Column(
-                      children: [
-                        Divider(),
-                        ListTile(
-                          title: Padding(
-                            padding: const EdgeInsets.only(left: 30.0),
-                            child: Text(cities[i]),
-                          ),
-                          onTap: () {
-                            Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => SchoolListPage({'number':1, 'prefecture':'札幌市','schoolType':'Kindergarten'}),
-                                  fullscreenDialog: true,
-                                )
+                  Column(
+                    children: [
+                      Divider(),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        key: Key(selectedTile.toString()),
+                        itemCount: cities.length,
+                        itemBuilder: (context,index) {
+                          return ExpansionTile(
+                            initiallyExpanded: index == selectedTile,
+                            title: Padding(
+                              padding: const EdgeInsets.only(left: 30.0),
+                              child: Text(cities[index]),
+                            ),
+                            onExpansionChanged: (bool changed){
+                              if(changed) {
+                                setState(() {
+                                  selectedTile = index;
+                                });
+                              }else{
+                                setState(() {
+                                  selectedTile = -1;
+                                });
+                              }
+                              setState(() {
+                                city = cities[index];
+                              });
+                              },
+                            children: [
+                              FutureBuilder(
+                                future: _schoolList,
+                                builder: (BuildContext context, AsyncSnapshot<List<School>> snapshot) {
+                                  if (snapshot.connectionState == ConnectionState.done) {
+                                    if (snapshot.hasData) {
+                                      List<School> data = snapshot.data!;
+                                      return SafeArea(
+                                        child: SingleChildScrollView(
+                                          child: ListView.builder(
+                                            itemCount: data?.length,
+                                            shrinkWrap: true,
+                                            physics: const NeverScrollableScrollPhysics(),
+                                            itemBuilder: (BuildContext context,int index) {
+                                              return Card(
+                                                  child: ListTile(
+                                                    title: Text(data[index].name),
+                                                    onTap: () async {},
+                                                  )
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        );
+                                      } else {
+                                        return const Center(
+                                          child: Icon(
+                                            Icons.error_outline,
+                                            color: Colors.red,
+                                            size: 60,
+                                          ),
+                                        );
+                                      }
+                                    } else if (snapshot.connectionState == ConnectionState.waiting) {
+                                      return  const Center(
+                                        child: Icon(
+                                          Icons.error_outline,
+                                          color: Colors.red,
+                                          size: 60,
+                                        ),
+                                      );
+                                    } else {
+                                      return const Center(
+                                        child: Icon(
+                                          Icons.error_outline,
+                                          color: Colors.red,
+                                          size: 60,
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
+                              ],
                             );
                           },
                         ),

@@ -4,9 +4,11 @@ class KyushuArea extends StatefulWidget {
   const KyushuArea({
     super.key,
     required this.screenSize,
+    required this.schoolTypeEng,
   });
 
   final Size screenSize;
+  final String schoolTypeEng;
 
   @override
   State<KyushuArea> createState() => _KyushuAreaState();

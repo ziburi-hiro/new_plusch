@@ -4,9 +4,11 @@ class KinkiArea extends StatelessWidget {
   const KinkiArea({
     super.key,
     required this.screenSize,
+    required this.schoolTypeEng
   });
 
   final Size screenSize;
+  final String schoolTypeEng;
 
   @override
   Widget build(BuildContext context) {

@@ -4,9 +4,11 @@ class TyubuArea extends StatefulWidget {
   const TyubuArea({
     super.key,
     required this.screenSize,
+    required this.schoolTypeEng,
   });
 
   final Size screenSize;
+  final String schoolTypeEng;
 
   @override
   State<TyubuArea> createState() => _TyubuAreaState();

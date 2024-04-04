@@ -4,9 +4,11 @@ class KantouArea extends StatefulWidget {
   const KantouArea({
     super.key,
     required this.screenSize,
+    required this.schoolTypeEng
   });
 
   final Size screenSize;
+  final String schoolTypeEng;
 
   @override
   State<KantouArea> createState() => _KantouAreaState();
