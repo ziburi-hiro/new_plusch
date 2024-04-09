@@ -40,24 +40,6 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const WelcomePage(),
-      // initialRoute: '/WelcomePage',
-      // routes: <String,WidgetBuilder> {
-      //   ///オンボーディングのルート
-      //   '/WelcomePage': (BuildContext context) => const WelcomePage(),
-      //   '/LoginPage': (BuildContext context) => const LoginPage(),
-      //   '/MemberRegisterPage': (BuildContext context) => const MemberRegisterPage(),
-      //
-      //   ///TabBarのルート
-      //   '/TabBarPage': (BuildContext context) => const TabBarPage(),
-      //
-      //   ///ログイン後ルート
-      //   '/HomePage': (BuildContext context) => const HomePage(),
-      //   '/MyPage': (BuildContext context) => const MyPage(),
-      //   '/SearchHistoryPage': (BuildContext context) => const SearchHistoryPage(),
-      //   '/EnterInfoPage': (BuildContext context) => const EnterInfoPage(),
-      //   //'/Settings': (BuildContext context) => const Settings(),
-      //
-      // },
     );
   }
 }

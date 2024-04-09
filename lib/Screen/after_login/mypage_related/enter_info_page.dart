@@ -15,9 +15,9 @@ class EnterInfoPage extends StatefulWidget {
 }
 
 class _EnterInfoPageState extends State<EnterInfoPage> {
-
   String enrollmentYear = '入学年を選択';
   String graduationYear = '卒業年を選択';
+  String schoolName = '';
 
   @override
   Widget build(BuildContext context) {
@@ -55,13 +55,30 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
-                    const Text('学校名のスペース',style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),),
+
+                    ///選択された学校名を表示
+                    Visibility(
+                      visible: (schoolName != ''),
+                      child: Container(
+                        width: screenSize.width*0.9,
+                        height: screenSize.height*0.05,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.white,
+                        ),
+                        child: Center(
+                          child: FittedBox(
+                            child: Text(schoolName.toString(),style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),),
+                          ),
+                        ),
+                      ),
+                    ),
 
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
 
                     ///学校選択ボタン
@@ -74,13 +91,16 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
                           ),
                           backgroundColor: buttonColor,
                         ),
-                        onPressed: () {
-                          Navigator.of(context).push(
+                        onPressed: () async {
+                          schoolName = await Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => PrefecturesSelectPage(widget.kindOfSchool['schoolEng']),
-                                fullscreenDialog: true,
+                                //fullscreenDialog: true,
                               )
-                          );
+                          ).then((value) {
+                            setState(() {});
+                            return value;
+                          });
                         },
                         child: const Text('都道府県から学校を選択',style: TextStyle(
                           fontWeight: FontWeight.bold,

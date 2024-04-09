@@ -96,7 +96,9 @@ class _HokkaidoAreaState extends State<HokkaidoArea> {
                                               return Card(
                                                   child: ListTile(
                                                     title: Text(data[index].name),
-                                                    onTap: () async {},
+                                                    onTap: () async {
+                                                      Navigator.pop(context,data[index].name.toString());
+                                                    },
                                                   )
                                                 );
                                               },

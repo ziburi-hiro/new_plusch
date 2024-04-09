@@ -21,7 +21,7 @@ class _TouhokuAreaState extends State<TouhokuArea> {
   List<List> cities = [municipalitiesMap['02']!,municipalitiesMap['03']!,municipalitiesMap['04']!,municipalitiesMap['05']!,municipalitiesMap['06']!,municipalitiesMap['07']!];
   List prefectureList = ['青森県','岩手県','宮城県','秋田県','山形県','福島県'];
   String city = '';
-  int prefectureNum = 0;
+  int prefectureNum = 2;
   int selectedMunicipalityTile = -1;
   int selectedPrefectureTile = -1;
 
@@ -102,7 +102,7 @@ class _TouhokuAreaState extends State<TouhokuArea> {
                                   }
                                   setState(() {
                                     city = cities[findex][index];
-                                    prefectureNum = findex + 2;
+                                    prefectureNum =  findex + 2;
                                   });
                                 },
                                 children: [
@@ -122,7 +122,9 @@ class _TouhokuAreaState extends State<TouhokuArea> {
                                                   return Card(
                                                       child: ListTile(
                                                         title: Text(data[index].name),
-                                                        onTap: () async {},
+                                                        onTap: () async {
+                                                          Navigator.pop(context,data[index].name.toString());
+                                                        },
                                                       )
                                                   );
                                                 },

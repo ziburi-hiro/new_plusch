@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:plusch/Components/prefecture_area/municipalities_list.dart';
+import 'package:plusch/Models/school.dart';
 
 class ShikokuArea extends StatefulWidget {
   const ShikokuArea({
@@ -15,8 +17,22 @@ class ShikokuArea extends StatefulWidget {
 }
 
 class _ShikokuAreaState extends State<ShikokuArea> {
+  List<List> cities = [
+    municipalitiesMap['36']!,
+    municipalitiesMap['37']!,
+    municipalitiesMap['38']!,
+    municipalitiesMap['39']!
+  ];
+  List prefectureList = ['徳島県','香川県','愛媛県','高知県'];
+  String city = '';
+  int prefectureNum = 0;
+  int selectedMunicipalityTile = -1;
+  int selectedPrefectureTile = -1;
+
   @override
   Widget build(BuildContext context) {
+    Future<List<School>>? schoolList =  School.getSchoolList(prefectureNum,city,widget.schoolTypeEng);
+
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
@@ -36,49 +52,127 @@ class _ShikokuAreaState extends State<ShikokuArea> {
 
             },
             children: [
-              Theme(
-                data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-                child: ExpansionTile(
-                  title: const Padding(
-                    padding: EdgeInsets.only(left: 15.0),
-                    child: Text('徳島県'),
-                  ),
-                  onExpansionChanged: (bool changed) {},
-                  children: [],
-                ),
-              ),
-              Theme(
-                data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-                child: ExpansionTile(
-                  title: const Padding(
-                    padding: EdgeInsets.only(left: 15.0),
-                    child: Text('香川県'),
-                  ),
-                  onExpansionChanged: (bool changed) {},
-                  children: [],
-                ),
-              ),
-              Theme(
-                data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-                child: ExpansionTile(
-                  title: const Padding(
-                    padding: EdgeInsets.only(left: 15.0),
-                    child: Text('愛媛県'),
-                  ),
-                  onExpansionChanged: (bool changed) {},
-                  children: [],
-                ),
-              ),
-              Theme(
-                data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-                child: ExpansionTile(
-                  title: const Padding(
-                    padding: EdgeInsets.only(left: 15.0),
-                    child: Text('高知県'),
-                  ),
-                  onExpansionChanged: (bool changed) {},
-                  children: [],
-                ),
+              ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  key: Key(selectedPrefectureTile.toString()),
+                  itemCount: prefectureList.length,
+                  itemBuilder: (context, findex){
+                    return ExpansionTile(
+                      initiallyExpanded: findex == selectedPrefectureTile,
+                      title: Padding(
+                        padding: const EdgeInsets.only(left: 15.0),
+                        child: Text(prefectureList[findex]),
+                      ),
+                      onExpansionChanged: (bool changed) {
+                        setState(() {
+                          selectedMunicipalityTile = -1;
+                        });
+                        if(changed) {
+                          setState(() {
+                            selectedPrefectureTile = findex;
+                          });
+                        }else{
+                          setState(() {
+                            selectedPrefectureTile = -1;
+                          });
+                        }
+                      },
+                      children: [
+                        Column(
+                          children: [
+                            const Divider(),
+                            ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              key: Key(selectedMunicipalityTile.toString()),
+                              itemCount: cities[findex].length,
+                              itemBuilder: (context,index) {
+                                return ExpansionTile(
+                                  initiallyExpanded: index == selectedMunicipalityTile,
+                                  title: Padding(
+                                    padding: const EdgeInsets.only(left: 30.0),
+                                    child: Text(cities[findex][index]),
+                                  ),
+                                  onExpansionChanged: (bool changed){
+                                    if(changed) {
+                                      setState(() {
+                                        selectedMunicipalityTile = index;
+                                      });
+                                    }else{
+                                      setState(() {
+                                        selectedMunicipalityTile = -1;
+                                      });
+                                    }
+                                    setState(() {
+                                      city = cities[findex][index];
+                                      prefectureNum =  findex + 36;
+                                    });
+                                  },
+                                  children: [
+                                    FutureBuilder(
+                                      future: schoolList,
+                                      builder: (BuildContext context, AsyncSnapshot<List<School>> snapshot) {
+                                        if (snapshot.connectionState == ConnectionState.done) {
+                                          if (snapshot.hasData) {
+                                            List<School> data = snapshot.data!;
+                                            return SafeArea(
+                                              child: SingleChildScrollView(
+                                                child: ListView.builder(
+                                                  itemCount: data.length,
+                                                  shrinkWrap: true,
+                                                  physics: const NeverScrollableScrollPhysics(),
+                                                  itemBuilder: (BuildContext context,int index) {
+                                                    return Card(
+                                                        child: ListTile(
+                                                          title: Text(data[index].name),
+                                                          onTap: () async {
+                                                            Navigator.pop(context,data[index].name.toString());
+                                                          },
+                                                        )
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            );
+                                          } else {
+                                            return const Center(
+                                              child: Icon(
+                                                Icons.error_outline,
+                                                color: Colors.red,
+                                                size: 60,
+                                              ),
+                                            );
+                                          }
+                                        } else if (snapshot.connectionState == ConnectionState.waiting) {
+                                          return  const Center(
+                                            child: Icon(
+                                              Icons.error_outline,
+                                              color: Colors.red,
+                                              size: 60,
+                                            ),
+                                          );
+                                        } else {
+                                          return const Center(
+                                            child: Icon(
+                                              Icons.error_outline,
+                                              color: Colors.red,
+                                              size: 60,
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                            const Divider(),
+                          ],
+                        ),
+                      ],
+                    );
+                  }
               ),
             ],
           ),

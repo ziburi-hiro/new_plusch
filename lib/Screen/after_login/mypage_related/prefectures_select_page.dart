@@ -24,37 +24,48 @@ class _PrefecturesSelectPageState extends State<PrefecturesSelectPage> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
 
-    return Scaffold(
-      backgroundColor: mainBackColor,
-      appBar: AppBar(
-        title: const Text('都道府県を選択',style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),),
-        backgroundColor: appbarColor,
-      ),
-      body: SingleChildScrollView(
-        child: ScreenUtilInit(
-          designSize: const Size(393, 852),
-          child: Column(
-            children: [
-              ///北海道地方
-              HokkaidoArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng,),
-              ///東北地方
-              TouhokuArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng),
-              ///関東地方
-              KantouArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng),
-              ///中部地方
-              TyubuArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng),
-              ///近畿地方
-              KinkiArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng),
-              ///中国地方
-              TyugokuArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng),
-              ///四国地方
-              ShikokuArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng),
-              ///九州地方
-              KyushuArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng),
-            ],
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        backgroundColor: mainBackColor,
+        appBar: AppBar(
+          title: const Text('都道府県を選択',style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context,'');
+            },
+            icon: Icon(Icons.close),
+            color: Colors.white,
+          ),
+          backgroundColor: appbarColor,
+          automaticallyImplyLeading: false,
+        ),
+        body: SingleChildScrollView(
+          child: ScreenUtilInit(
+            designSize: const Size(393, 852),
+            child: Column(
+              children: [
+                ///北海道地方
+                HokkaidoArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng,),
+                ///東北地方
+                TouhokuArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng),
+                ///関東地方
+                KantouArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng),
+                ///中部地方
+                TyubuArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng),
+                ///近畿地方
+                KinkiArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng),
+                ///中国地方
+                TyugokuArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng),
+                ///四国地方
+                ShikokuArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng),
+                ///九州地方
+                KyushuArea(screenSize: screenSize,schoolTypeEng: widget.schoolTypeEng),
+              ],
+            ),
           ),
         ),
       ),
