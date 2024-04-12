@@ -8,11 +8,13 @@ class SchoolSelectButton extends StatelessWidget {
     required this.screenSize,
     required this.kindOfSchool,
     required this.kindOfSchoolEng,
+    required this.graduatedSchoolName,
   });
 
   final Size screenSize;
   final String kindOfSchool;
   final String kindOfSchoolEng;
+  final String graduatedSchoolName;
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +42,16 @@ class SchoolSelectButton extends StatelessWidget {
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),),
+            (graduatedSchoolName.isEmpty) ?
             Text('Tapして$kindOfSchoolを選択',style: const TextStyle(
               fontSize: 16,
               color: Colors.black,
-            ),),
+            ),)
+                :
+            Text(graduatedSchoolName,style: const TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+            ),)
           ],
         ),
       ),

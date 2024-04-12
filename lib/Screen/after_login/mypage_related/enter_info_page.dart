@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plusch/Constants/colors.dart';
+import 'package:plusch/Firebase/graduated_school_firestore.dart';
 import 'package:plusch/Models/YearMonthModel.dart';
 import 'package:plusch/Screen/after_login/mypage_related/prefectures_select_page.dart';
+import 'package:plusch/utils/authentication.dart';
 
 class EnterInfoPage extends StatefulWidget {
   EnterInfoPage(this.kindOfSchool , {super.key});
@@ -18,6 +21,11 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
   String enrollmentYear = '入学年を選択';
   String graduationYear = '卒業年を選択';
   String schoolName = '';
+  String schoolId = '';
+  List<String> schoolDetails = ['',''];
+  double ratings = 3;
+  TextEditingController reviewController = TextEditingController();
+  final reviewFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +66,7 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
 
                     ///選択された学校名を表示
                     Visibility(
-                      visible: (schoolName != ''),
+                      visible: (schoolDetails[0] != ''),
                       child: Container(
                         width: screenSize.width*0.9,
                         height: screenSize.height*0.05,
@@ -68,7 +76,7 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
                         ),
                         child: Center(
                           child: FittedBox(
-                            child: Text(schoolName.toString(),style: const TextStyle(
+                            child: Text(schoolDetails[0].toString(),style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
                             ),),
@@ -92,7 +100,7 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
                           backgroundColor: buttonColor,
                         ),
                         onPressed: () async {
-                          schoolName = await Navigator.of(context).push(
+                          schoolDetails = await Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => PrefecturesSelectPage(widget.kindOfSchool['schoolEng']),
                                 //fullscreenDialog: true,
@@ -238,14 +246,31 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
 
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: screenSize.height*0.2,
-                  width: screenSize.width*0.93,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: Colors.white,
-                  ),
-                  child: const Text('学校の評価'),
+                child: Column(
+                  children: [
+                    RatingBar.builder(
+                      initialRating: ratings,
+                      minRating: 1,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      updateOnDrag: true,
+                      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        setState(() {
+                          ratings = rating;
+                        });
+                      },
+                    ),
+
+                    Text('Rating: $ratings',style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18
+                    ),),
+                  ],
                 ),
               ),
 
@@ -263,42 +288,75 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
 
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: screenSize.height*0.2,
-                  width: screenSize.width*0.93,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: Colors.white,
+                child: Form(
+                  key: reviewFormKey,
+                  child: SizedBox(
+                    width: screenSize.width*0.9,
+                    height: screenSize.height*0.2,
+                    child: TextFormField(
+                      controller: reviewController,
+                      maxLines: 10,
+                      maxLength: 300,
+                      keyboardType: TextInputType.multiline,
+                      decoration: const InputDecoration(
+                        hintText: '評価理由を入力',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(5)),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                      ),
+                      validator: (value) {
+                        if(value == null || value.isEmpty){
+                          return '評価理由を入力してください';
+                        }
+                        return null;
+                      },
+                    ),
                   ),
-                  child: const Text('学校の評価理由'),
                 ),
               ),
 
-              ///特記事項
-              const Padding(
-                padding: EdgeInsets.only(top: 10.0, left: 15.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('自由記述',style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),),
-                ),
-              ),
-
+              ///登録ボタン
               Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: screenSize.height*0.2,
-                  width: screenSize.width*0.93,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: Colors.white,
+                padding: const EdgeInsets.all(20.0),
+                child: SizedBox(
+                  width: screenSize.width*0.6,
+                  height: screenSize.height*0.05,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      backgroundColor: buttonColor,
+                    ),
+                    onPressed: () {
+                      if(schoolDetails[0] != '' &&
+                          enrollmentYear != '入学年を選択' &&
+                          graduationYear != '卒業年を選択' &&
+                          reviewFormKey.currentState!.validate()
+                      ){
+                        Map school = {
+                          'type': widget.kindOfSchool['schoolEng'],
+                          'schoolId': schoolDetails[1],
+                          'enrollmentYear': enrollmentYear,
+                          'graduationYear': graduationYear,
+                          'rate': ratings,
+                          'reason': reviewController.text,
+                        };
+                        GraduatedSchoolFireStore.setSchool(Authentication.myAccount!, school);
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: const Text('情報登録',style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),),
                   ),
-                  child: const Text('自由記述'),
                 ),
               ),
-
             ],
           ),
         ),

@@ -123,7 +123,7 @@ class _KantouAreaState extends State<KantouArea> {
                                                         child: ListTile(
                                                           title: Text(data[index].name),
                                                           onTap: () async {
-                                                            Navigator.pop(context,data[index].name.toString());
+                                                            Navigator.pop(context,[data[index].name.toString(),data[index].uid.toString()]);
                                                           },
                                                         )
                                                     );

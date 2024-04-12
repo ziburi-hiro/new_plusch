@@ -97,7 +97,7 @@ class _HokkaidoAreaState extends State<HokkaidoArea> {
                                                   child: ListTile(
                                                     title: Text(data[index].name),
                                                     onTap: () async {
-                                                      Navigator.pop(context,data[index].name.toString());
+                                                      Navigator.pop(context,[data[index].name.toString(),data[index].uid.toString()]);
                                                     },
                                                   )
                                                 );
