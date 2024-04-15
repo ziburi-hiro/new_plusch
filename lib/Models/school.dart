@@ -3,15 +3,15 @@ import '../utils/db_provider.dart';
 
 
 class School {
-  String uid;
-  String name;
+  String schoolId;
+  String schoolName;
   String address;
   int postalCode;
   int prefectureId;
 
   School(
-      {required this.uid,
-        required this.name,
+      {required this.schoolId,
+        required this.schoolName,
         required this.address,
         required this.postalCode,
         required this.prefectureId,
@@ -25,8 +25,8 @@ class School {
         whereArgs: [schoolId]);
 
     return School(
-        uid: maps[0]['uid'],
-        name: maps[0]['name'],
+        schoolId: maps[0]['uid'],
+        schoolName: maps[0]['name'],
         address: maps[0]['address'],
         postalCode: maps[0]['postal_code'],
         prefectureId: maps[0]['prefecture_id']
@@ -41,8 +41,8 @@ class School {
         whereArgs: [prefectureId, schoolType, "%$city%"]);
     return List.generate(maps.length, (i) {
       return School(
-          uid: maps[i]['uid'],
-          name: maps[i]['name'],
+          schoolId: maps[i]['uid'],
+          schoolName: maps[i]['name'],
           address: maps[i]['address'],
           postalCode: maps[i]['postal_code'],
           prefectureId: maps[i]['prefecture_id']

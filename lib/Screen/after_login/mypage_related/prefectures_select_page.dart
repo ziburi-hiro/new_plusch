@@ -35,9 +35,9 @@ class _PrefecturesSelectPageState extends State<PrefecturesSelectPage> {
           ),),
           leading: IconButton(
             onPressed: () {
-              Navigator.pop(context,'');
+              Navigator.pop(context,['','']);
             },
-            icon: Icon(Icons.close),
+            icon: const Icon(Icons.close),
             color: Colors.white,
           ),
           backgroundColor: appbarColor,

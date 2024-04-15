@@ -177,12 +177,12 @@ class _MyPageState extends State<MyPage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  SchoolSelectButton(screenSize: screenSize, kindOfSchool: '幼稚園', kindOfSchoolEng: 'Kindergarten', graduatedSchoolName: (snapshot.data!['Kindergarten'] != null) ? snapshot.data!['Kindergarten'].name : ''),
-                                  SchoolSelectButton(screenSize: screenSize, kindOfSchool: '小学校', kindOfSchoolEng: 'PrimarySchool', graduatedSchoolName: (snapshot.data!['PrimarySchool'] != null) ? snapshot.data!['PrimarySchool'].name : '',),
-                                  SchoolSelectButton(screenSize: screenSize, kindOfSchool: '中学校', kindOfSchoolEng: 'JuniorHighSchool', graduatedSchoolName: (snapshot.data!['JuniorHighSchool'] != null) ? snapshot.data!['JuniorHighSchool'].name : '',),
-                                  SchoolSelectButton(screenSize: screenSize, kindOfSchool: '高等学校', kindOfSchoolEng: 'HighSchool', graduatedSchoolName: (snapshot.data!['HighSchool'] != null) ? snapshot.data!['HighSchool'].name : '',),
-                                  SchoolSelectButton(screenSize: screenSize, kindOfSchool: '大学', kindOfSchoolEng: 'University', graduatedSchoolName: (snapshot.data!['University'] != null) ? snapshot.data!['University'].name : '',),
-                                  SchoolSelectButton(screenSize: screenSize, kindOfSchool: '大学院', kindOfSchoolEng: 'GraduateSchool', graduatedSchoolName: (snapshot.data!['GraduateSchool'] != null) ? snapshot.data!['GraduateSchool'].name : '',),
+                                  SchoolSelectButton(screenSize: screenSize, kindOfSchool: '幼稚園', kindOfSchoolEng: 'Kindergarten', graduatedSchoolName: (snapshot.data!['Kindergarten'] != null) ? snapshot.data!['Kindergarten'].schoolName : ''),
+                                  SchoolSelectButton(screenSize: screenSize, kindOfSchool: '小学校', kindOfSchoolEng: 'PrimarySchool', graduatedSchoolName: (snapshot.data!['PrimarySchool'] != null) ? snapshot.data!['PrimarySchool'].schoolName : '',),
+                                  SchoolSelectButton(screenSize: screenSize, kindOfSchool: '中学校', kindOfSchoolEng: 'JuniorHighSchool', graduatedSchoolName: (snapshot.data!['JuniorHighSchool'] != null) ? snapshot.data!['JuniorHighSchool'].schoolName : '',),
+                                  SchoolSelectButton(screenSize: screenSize, kindOfSchool: '高等学校', kindOfSchoolEng: 'HighSchool', graduatedSchoolName: (snapshot.data!['HighSchool'] != null) ? snapshot.data!['HighSchool'].schoolName : '',),
+                                  SchoolSelectButton(screenSize: screenSize, kindOfSchool: '大学', kindOfSchoolEng: 'University', graduatedSchoolName: (snapshot.data!['University'] != null) ? snapshot.data!['University'].schoolName : '',),
+                                  SchoolSelectButton(screenSize: screenSize, kindOfSchool: '大学院', kindOfSchoolEng: 'GraduateSchool', graduatedSchoolName: (snapshot.data!['GraduateSchool'] != null) ? snapshot.data!['GraduateSchool'].schoolName : '',),
                                   SchoolSelectButton(screenSize: screenSize, kindOfSchool: '就職先', kindOfSchoolEng: 'Employment', graduatedSchoolName: ''),
                                 ],
                               )

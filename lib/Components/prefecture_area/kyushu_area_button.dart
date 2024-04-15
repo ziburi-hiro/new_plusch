@@ -129,9 +129,9 @@ class _KyushuAreaState extends State<KyushuArea> {
                                                   itemBuilder: (BuildContext context,int index) {
                                                     return Card(
                                                         child: ListTile(
-                                                          title: Text(data[index].name),
+                                                          title: Text(data[index].schoolName),
                                                           onTap: () async {
-                                                            Navigator.pop(context,[data[index].name.toString(),data[index].uid.toString()]);
+                                                            Navigator.pop(context,[data[index].schoolName.toString(),data[index].schoolId.toString()]);
                                                           },
                                                         )
                                                     );
