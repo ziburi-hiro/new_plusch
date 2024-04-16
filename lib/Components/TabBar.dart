@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:plusch/Constants/colors.dart';
 import 'package:plusch/Screen/after_login/home_related/home_page.dart';
-import 'package:plusch/Screen/after_login/mypage_related/enter_info_page.dart';
+import 'package:plusch/Screen/after_login/mypage_related/register_history/enter_info_page.dart';
 import 'package:plusch/Screen/after_login/mypage_related/mypage.dart';
 import 'package:plusch/Screen/after_login/mypage_related/settings.dart';
 import 'package:plusch/Screen/after_login/search_history_related/search_history_page.dart';

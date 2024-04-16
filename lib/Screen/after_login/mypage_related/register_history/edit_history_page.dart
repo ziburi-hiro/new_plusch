@@ -5,27 +5,31 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plusch/Constants/colors.dart';
 import 'package:plusch/Firebase/graduated_school_firestore.dart';
 import 'package:plusch/Models/YearMonthModel.dart';
-import 'package:plusch/Screen/after_login/mypage_related/prefectures_select_page.dart';
+import 'package:plusch/Screen/after_login/mypage_related/register_history/prefectures_select_page.dart';
 import 'package:plusch/utils/authentication.dart';
 
-class EnterInfoPage extends StatefulWidget {
-  EnterInfoPage(this.kindOfSchool , {super.key});
+class EditHistoryPage extends StatefulWidget {
+  EditHistoryPage(this.schoolInfo,{super.key});
 
-  Map kindOfSchool;
+  Map schoolInfo;
 
   @override
-  State<EnterInfoPage> createState() => _EnterInfoPageState();
+  State<EditHistoryPage> createState() => _EditHistoryPageState();
 }
 
-class _EnterInfoPageState extends State<EnterInfoPage> {
-  String enrollmentYear = '入学年を選択';
-  String graduationYear = '卒業年を選択';
-  String schoolName = '';
-  String schoolId = '';
-  List<String> schoolDetails = ['',''];
-  double ratings = 3;
+class _EditHistoryPageState extends State<EditHistoryPage> {
+
   TextEditingController reviewController = TextEditingController();
   final reviewFormKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      reviewController = TextEditingController(text: widget.schoolInfo['reason']);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +40,13 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
       child: Scaffold(
         backgroundColor: mainBackColor,
         appBar: AppBar(
-          title: Text('${widget.kindOfSchool['school']}の情報を入力',style: const TextStyle(
+          title: Text('${widget.schoolInfo['schoolType']}データを編集',style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),),
           leading: IconButton(
             onPressed: () {
-              Navigator.pop(context,'');
+              Navigator.pop(context);
             },
             icon: const Icon(Icons.close),
             color: Colors.white,
@@ -74,24 +78,27 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
                   child: Column(
                     children: [
 
-                      ///選択された学校名を表示
-                      Visibility(
-                        visible: (schoolDetails[0] != ''),
-                        child: Container(
-                          width: screenSize.width*0.9,
-                          height: screenSize.height*0.05,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: Colors.white,
-                          ),
-                          child: Center(
-                            child: FittedBox(
-                              child: Text(schoolDetails[0].toString(),style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),),
-                            ),
-                          ),
+                      ///選択していた学校名を表示
+                      Container(
+                        width: screenSize.width*0.9,
+                        height: screenSize.height*0.05,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.white,
+                        ),
+                        child: Center(
+                          child: (widget.schoolInfo['schoolName'] != '') ?
+                          FittedBox(
+                            child: Text(widget.schoolInfo['schoolName'],style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),),
+                          )
+                              :
+                          const Text('学校を選択してください',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),),
                         ),
                       ),
 
@@ -112,12 +119,12 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
                           onPressed: () async {
                             await Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => PrefecturesSelectPage(widget.kindOfSchool['schoolEng']),
-                                  //fullscreenDialog: true,
+                                  builder: (context) => PrefecturesSelectPage(widget.schoolInfo['schoolTypeEng']),
                                 )
                             ).then((value) {
                               setState(() {
-                                schoolDetails = value;
+                                widget.schoolInfo['schoolName'] = value[0];
+                                widget.schoolInfo['schoolId'] = value[1];
                               });
                             });
                           },
@@ -176,13 +183,13 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
                                   ),
                                   onConfirm: (date) {
                                     setState(() {
-                                      enrollmentYear = '${date.year}年${date.month}月';
+                                      widget.schoolInfo['enrollment_year'] = '${date.year}年${date.month}月';
                                     });
                                   },
                                   locale: LocaleType.jp,
                                 );
                               },
-                              child: Text(enrollmentYear,style: const TextStyle(
+                              child: Text(widget.schoolInfo['enrollment_year'],style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,
                                 color: Colors.white,
@@ -224,13 +231,13 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
                                   ),
                                   onConfirm: (date) {
                                     setState(() {
-                                      graduationYear = '${date.year}年${date.month}月';
+                                      widget.schoolInfo['graduation_year'] = '${date.year}年${date.month}月';
                                     });
                                   },
                                   locale: LocaleType.jp,
                                 );
                               },
-                              child: Text(graduationYear,style: const TextStyle(
+                              child: Text(widget.schoolInfo['graduation_year'],style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,
                                 color: Colors.white,
@@ -260,7 +267,7 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
                   child: Column(
                     children: [
                       RatingBar.builder(
-                        initialRating: ratings,
+                        initialRating: widget.schoolInfo['rate'],
                         minRating: 1,
                         allowHalfRating: true,
                         itemCount: 5,
@@ -272,14 +279,14 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
                         ),
                         onRatingUpdate: (rating) {
                           setState(() {
-                            ratings = rating;
+                            widget.schoolInfo['rate'] = rating;
                           });
                         },
                       ),
 
-                      Text('Rating: $ratings',style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18
+                      Text('Rating : ${widget.schoolInfo['rate']}',style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18
                       ),),
                     ],
                   ),
@@ -343,21 +350,20 @@ class _EnterInfoPageState extends State<EnterInfoPage> {
                         backgroundColor: buttonColor,
                       ),
                       onPressed: () {
-                        if(schoolDetails[0] != '' &&
-                            enrollmentYear != '入学年を選択' &&
-                            graduationYear != '卒業年を選択' &&
+                        if(widget.schoolInfo['schoolName'] != '' &&
                             reviewFormKey.currentState!.validate()
                         ){
                           Map school = {
-                            'type': widget.kindOfSchool['schoolEng'],
-                            'schoolId': schoolDetails[1],
-                            'enrollmentYear': enrollmentYear,
-                            'graduationYear': graduationYear,
-                            'rate': ratings,
+                            'type': widget.schoolInfo['schoolTypeEng'],
+                            'schoolId': widget.schoolInfo['schoolId'],
+                            'enrollmentYear': widget.schoolInfo['enrollment_year'],
+                            'graduationYear': widget.schoolInfo['graduation_year'],
+                            'rate': widget.schoolInfo['rate'],
                             'reason': reviewController.text,
                           };
                           GraduatedSchoolFireStore.setSchool(Authentication.myAccount!, school);
-                          Navigator.pop(context,schoolDetails[0].toString());
+                          Navigator.pop(context);
+                          Navigator.pop(context,widget.schoolInfo['schoolName']);
                         }
                       },
                       child: const Text('情報登録',style: TextStyle(

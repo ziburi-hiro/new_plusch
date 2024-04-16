@@ -23,6 +23,10 @@ class GraduatedSchoolFireStore {
     }
   }
 
+  static Future<dynamic> deleteSchool(Account account, schoolType) async {
+    await graduatedSchools.doc(account.id + schoolType).delete();
+  }
+
   static dynamic getGraduatedSchool(Account account, String type) async {
     var documentSnapshot = await graduatedSchools
         .where('user_id', isEqualTo: account.id)

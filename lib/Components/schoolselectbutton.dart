@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plusch/Constants/colors.dart';
-import 'package:plusch/Screen/after_login/mypage_related/check_info_page.dart';
-import 'package:plusch/Screen/after_login/mypage_related/enter_info_page.dart';
+import 'package:plusch/Screen/after_login/mypage_related/register_history/check_info_page.dart';
+import 'package:plusch/Screen/after_login/mypage_related/register_history/enter_info_page.dart';
 
 class SchoolSelectButton extends StatefulWidget {
   SchoolSelectButton({
@@ -40,11 +40,15 @@ class _SchoolSelectButtonState extends State<SchoolSelectButton> {
               });
             });
           }else{
-            Navigator.of(context).push(
+            await Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => CheckInfoPage(),
+                builder: (context) => CheckInfoPage({'school':widget.kindOfSchool, 'schoolEng':widget.kindOfSchoolEng, 'schoolName':widget.graduatedSchoolName}),
               )
-            );
+            ).then((value) {
+              setState(() {
+                widget.graduatedSchoolName = value;
+              });
+            });
           }
         },
         style: ElevatedButton.styleFrom(
