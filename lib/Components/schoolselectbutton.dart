@@ -1,25 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:plusch/Constants/colors.dart';
+import 'package:plusch/Screen/after_login/mypage_related/register_history/check_info_page.dart';
+import 'package:plusch/Screen/after_login/mypage_related/register_history/enter_info_page.dart';
 
-class SchoolSelectButton extends StatelessWidget {
-  const SchoolSelectButton({
+class SchoolSelectButton extends StatefulWidget {
+  SchoolSelectButton({
     super.key,
     required this.screenSize,
     required this.kindOfSchool,
     required this.kindOfSchoolEng,
+    required this.graduatedSchoolName
   });
 
   final Size screenSize;
   final String kindOfSchool;
   final String kindOfSchoolEng;
+  String graduatedSchoolName;
 
+  @override
+  State<SchoolSelectButton> createState() => _SchoolSelectButtonState();
+}
+
+class _SchoolSelectButtonState extends State<SchoolSelectButton> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: screenSize.height*0.075,
-      width: screenSize.width*0.9,
+      height: widget.screenSize.height*0.075,
+      width: widget.screenSize.width*0.9,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () async {
+          if(widget.graduatedSchoolName == ''){
+            await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => EnterInfoPage({'school':widget.kindOfSchool, 'schoolEng':widget.kindOfSchoolEng}),
+                )
+            ).then((value) {
+              setState(() {
+                widget.graduatedSchoolName = value;
+              });
+            });
+          }else{
+            await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => CheckInfoPage({'school':widget.kindOfSchool, 'schoolEng':widget.kindOfSchoolEng, 'schoolName':widget.graduatedSchoolName}),
+              )
+            ).then((value) {
+              setState(() {
+                widget.graduatedSchoolName = value;
+              });
+            });
+          }
+        },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -28,15 +59,21 @@ class SchoolSelectButton extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(kindOfSchool,style: const TextStyle(
+            Text(widget.kindOfSchool,style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),),
-            Text('Tapして$kindOfSchoolを選択',style: const TextStyle(
+            (widget.graduatedSchoolName.isEmpty) ?
+            Text('Tapして${widget.kindOfSchool}を選択',style: const TextStyle(
               fontSize: 16,
               color: Colors.black,
-            ),),
+            ),)
+                :
+            Text(widget.graduatedSchoolName,style: const TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+            ),)
           ],
         ),
       ),

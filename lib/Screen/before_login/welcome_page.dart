@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:plusch/Constants/colors.dart';
+import 'package:plusch/Screen/before_login/login_page.dart';
+import 'package:plusch/Screen/before_login/member_register_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -171,7 +173,7 @@ class _WelcomePageState extends State<WelcomePage> {
                               backgroundColor: buttonColor,
                             ),
                             onPressed: (){
-                              Navigator.pushNamed(context, '/MemberRegisterPage');
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MemberRegisterPage()));
                             },
                             child: const Text(
                               '同意して会員登録',
@@ -196,7 +198,7 @@ class _WelcomePageState extends State<WelcomePage> {
                               backgroundColor: buttonColor,
                             ),
                             onPressed: (){
-                              Navigator.pushNamed(context, '/LoginPage');
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginPage()));
                             },
                             child: const Text(
                               'ログイン',
