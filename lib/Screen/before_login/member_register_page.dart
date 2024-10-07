@@ -198,10 +198,10 @@ class _MemberRegisterPageState extends State<MemberRegisterPage> {
                             print('登録完了');
                           }else {
                             Authentication.deleteUser();
-                            // TODO エラーハンドリング実装
+                            print('error1');
                           }
                         }else {
-                          // TODO エラーハンドリング実装
+                          print('error2');
                         }
                       }
                     },

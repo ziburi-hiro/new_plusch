@@ -104,10 +104,11 @@ class _LoginPageState extends State<LoginPage> {
                         if(_result == true){
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TabBarPage()));
                         }else{
-                          // TODO エラーハンドリング実装
+                          print('error1');
+                          print(result.user!.uid);
                         }
                       }else{
-                        // TODO エラーハンドリング実装
+                        print('error2');
                       }
                       //Navigator.of(context).pop();
                     }

@@ -41,7 +41,7 @@ class UserFireStore {
       Authentication.myAccount = myAccount;
       return true;
     } on FirebaseException catch (e) {
-      return false;
+      print(e.message);
     }
   }
 }
