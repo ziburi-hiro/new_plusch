@@ -1,16 +1,31 @@
-# plusch
+## ①課題番号-プロダクト名
+卒業制作プロトタイプ
 
-A new Flutter project.
+## ②課題内容（どんな作品か）
 
-## Getting Started
+- 企画講座で考えていたアプリのプロトタイプを作成
+- flutterを用いて教育系のアプリを作成
+- プロトタイプということで学校の履歴などを登録できるようにするとこまで実装
 
-This project is a starting point for a Flutter application.
+## ③DEMO
+- アプリなのでデモ動画
 
-A few resources to get you started if this is your first Flutter project:
+## ④作ったアプリケーション用のIDまたはPasswordがある場合
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- ID: test@test.com
+- PW: test1234
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## ⑤工夫した点・こだわった点
+
+- シンプルなUIを心がけている
+- SQLiteを使用して学校情報を持ってきている
+
+## ⑥難しかった点・次回トライしたいこと(又は機能)
+
+- SQLiteを初めて使ったのでその取り扱い
+
+## ⑦質問・疑問・感想、シェアしたいこと等なんでも
+
+- [質問] 特になし
+- [感想] まだまだできていないことが多いが、楽しく作れた
+- [参考記事]
